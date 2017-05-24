@@ -1,0 +1,105 @@
+﻿<Window x:Class="MGSV_SaveSwitcher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MGSV_SaveSwitcher"
+        mc:Ignorable="d"
+        Title="MGSV: TPP Save Manager" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Cursor="">
+    
+    <Border Padding="10,20,10,10">
+        <StackPanel>
+
+            <TextBlock Text="Metal Gear Solid V: The Phantom Pain Save Manager" FontSize="14" Margin="10 0 10 20" FontWeight="Bold" HorizontalAlignment="Center"/>
+            
+            <TextBlock Text="Status" FontWeight="Bold" FontSize="12" Margin="10 0 10 0"/>
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Margin="10 0 10 0" Content="Current User" HorizontalContentAlignment="Center" FontSize="12"/>
+                <TextBox Grid.Column="1" Name="currentUser" Margin="10 0 10 0" IsReadOnly="True" Background="LightGray" FontSize="12"/>
+            </Grid>
+
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Margin="10 0 10 0" Content="Current Save" HorizontalContentAlignment="Center" FontSize="12"/>
+                <TextBox Grid.Column="1" Name="currentSave" Margin="10 0 10 0" IsReadOnly="True" Background="LightGray" FontSize="12"/>
+            </Grid>
+            
+            <TextBlock Text="Change User" FontWeight="Bold" Margin="10 0 10 0"/>
+            <TextBlock Text="Users" Margin="10 0 10 0" FontSize="12"/>
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Users" Margin="10 0 10 0" FontSize="12"/>
+                <ComboBox Grid.Column="0" Name="userList" Margin="10 0 10 0" FontSize="12">
+                    <ComboBoxItem>Thatsafy</ComboBoxItem>
+                    <ComboBoxItem>Nelivarvas</ComboBoxItem>
+                    <ComboBoxItem>Drk29</ComboBoxItem>
+                </ComboBox>
+                <Button Grid.Column="1" Name="applyUser" Click="applyUser_Click" Margin="10 0 10 0" Content="Apply" FontSize="12"/>
+            </Grid>
+
+            <TextBlock Text="Change Save" FontWeight="Bold" Margin="10 0 10 0"/>
+            <TextBlock Text="Saves" Margin="10 0 10 0" FontSize="12"/>
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Saves" Margin="10 0 10 0" FontSize="12"/>
+                <ComboBox Grid.Column="0" Name="saveChangeList" Margin="10 0 10 0" FontSize="12">
+                    <ComboBoxItem>Completed</ComboBoxItem>
+                    <ComboBoxItem>Stream</ComboBoxItem>
+                    <ComboBoxItem>Testing</ComboBoxItem>
+                </ComboBox>
+                <Button Grid.Column="1" Name="applySaveChange" Click="applySaveChange_Click" Margin="10 0 10 0" Content="Apply" FontSize="12"/>
+            </Grid>
+
+            <TextBlock Text="New Save" FontWeight="Bold" Margin="10 0 10 10"/>
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="newSaveName" FontSize="12" Margin="10 0 10 0"/>
+                <Button Grid.Column="1" Name="applyNewSaveName" Click="applyNewSaveName_Click" Content="Apply" FontSize="12" Margin="10 0 10 0"/>
+            </Grid>
+
+            <TextBlock Text="Delete Save" FontWeight="Bold" Margin="10 0 10 0"/>
+            <TextBlock Text="Saves" Margin="10 0 10 0" FontSize="12"/>
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Saves" Margin="10 0 10 0" FontSize="12"/>
+                <ComboBox Grid.Column="0" Name="saveDelList" Margin="10 0 10 0" FontSize="12">
+                    <ComboBoxItem>Item</ComboBoxItem>
+                    <ComboBoxItem>This</ComboBoxItem>
+                    <ComboBoxItem>Stream</ComboBoxItem>
+                </ComboBox>
+                <Button Grid.Column="1" Name="applyDelSave" Click="applyDelSave_Click" Margin="10 0 10 0" Content="Apply" FontSize="12"/>
+            </Grid>
+            
+            <Grid Margin="0, 0, 0, 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Steam directory" FontSize="12" Margin="10 0 10 0" FontWeight="Bold" HorizontalAlignment="Left"/>
+                <TextBox Grid.Column="1" Name="steamPath" IsReadOnly="True" Background="LightGray" FontSize="12" Margin="10 0 10 0" />
+            </Grid>
+
+            <TextBlock Text="Antti Alasalmi 2017" FontSize="12" Margin="10 20 10 0" FontWeight="Bold" HorizontalAlignment="Center"/>
+
+        </StackPanel>
+    </Border>
+</Window>
