@@ -1,0 +1,14 @@
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\bin\Release\MGSV_SaveSwitcher.exe.config
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\bin\Release\MGSV_SaveSwitcher.exe
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\bin\Release\MGSV_SaveSwitcher.pdb
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\obj\Release\MGSV_SaveSwitcher.csprojResolveAssemblyReference.cache
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\obj\Release\MainWindow.g.cs
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\obj\Release\App.g.cs
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\obj\Release\MGSV_SaveSwitcher_MarkupCompile.cache
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\obj\Release\MGSV_SaveSwitcher_MarkupCompile.lref
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\obj\Release\MainWindow.baml
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\obj\Release\MGSV_SaveSwitcher.g.resources
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\obj\Release\MGSV_SaveSwitcher.Properties.Resources.resources
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\obj\Release\MGSV_SaveSwitcher.csproj.GenerateResource.Cache
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\obj\Release\MGSV_SaveSwitcher.exe
+E:\Tiedostot\GitHub\MGSV_Save_Switcher\MGSV_SaveSwitcherC\MGSV_SaveSwitcher\MGSV_SaveSwitcher\obj\Release\MGSV_SaveSwitcher.pdb

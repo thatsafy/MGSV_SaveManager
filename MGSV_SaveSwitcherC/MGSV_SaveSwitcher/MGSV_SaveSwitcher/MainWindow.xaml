@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MGSV_SaveSwitcher"
         mc:Ignorable="d"
-        Title="MGSV: TPP Save Manager" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Cursor="" Height="548">
+        Title="MGSV: TPP Save Manager" Width="600" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Cursor="" Height="630" Icon="savemanager.ico">
     
     <Border Padding="10,20,10,10">
         <StackPanel>
@@ -42,7 +42,7 @@
                 <ComboBox Grid.Column="0" Name="userList" Margin="10 0 10 0" FontSize="12">
 
                 </ComboBox>
-                <Button Grid.Column="1" Name="applyUser" Click="applyUser_Click" Margin="10 0 10 0" Content="Apply" FontSize="12"/>
+                <Button Grid.Column="1" Name="applyUser" Click="ApplyUser_Click" Margin="10 0 10 0" Content="Apply" FontSize="12"/>
             </Grid>
 
             <TextBlock Text="Change Save" FontWeight="Bold" Margin="10 0 10 0"/>
@@ -56,17 +56,27 @@
                 <ComboBox Grid.Column="0" IsEnabled="False" Name="saveChangeList" Margin="10 0 10 0" FontSize="12">
                     
                 </ComboBox>
-                <Button Grid.Column="1" Name="applySaveChange" Click="applySaveChange_Click" Margin="10 0 10 0" Content="Apply" FontSize="12"/>
+                <Button Grid.Column="1" Name="applySaveChange" Click="ApplySaveChange_Click" Margin="10 0 10 0" Content="Apply" FontSize="12"/>
             </Grid>
 
-            <TextBlock Text="New Save" FontWeight="Bold" Margin="10 0 10 10"/>
+            <TextBlock Text="Rename Save" Name="RenameSave" FontWeight="Bold" Margin="10 0 10 10" />
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Name="RenameSaveName" Background ="LightGray" IsReadOnly="True" FontSize="12" Margin="10 0 10 0"/>
+                <Button Grid.Column="1" Name="ApplyRename" Click="ApplyRename_Click" IsEnabled="False" Content="Apply" FontSize="12" Margin="10 0 10 0"/>
+            </Grid>
+
+            <TextBlock Text="New Save" Name ="firstNew" FontWeight="Bold" Margin="10 0 10 10"/>
             <Grid Margin="0,0,0,15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="0" Name="newSaveName" Background ="LightGray" IsReadOnly="True" FontSize="12" Margin="10 0 10 0"/>
-                <Button Grid.Column="1" Name="applyNewSaveName" Click="applyNewSaveName_Click" Content="Apply" FontSize="12" Margin="10 0 10 0"/>
+                <Button Grid.Column="1" Name="applyNewSaveName" Click="ApplyNewSaveName_Click" Content="Apply" FontSize="12" Margin="10 0 10 0"/>
             </Grid>
 
             <TextBlock Text="Delete Save" FontWeight="Bold" Margin="10 0 10 0"/>
@@ -80,7 +90,7 @@
                 <ComboBox Grid.Column="0" IsEnabled="False" Name="saveDelList" Margin="10 0 10 0" FontSize="12">
                     
                 </ComboBox>
-                <Button Grid.Column="1" Name="applyDelSave" Click="applyDelSave_Click" Margin="10 0 10 0" Content="Apply" FontSize="12"/>
+                <Button Grid.Column="1" Name="applyDelSave" Click="ApplyDelSave_Click" Margin="10 0 10 0" Content="Apply" FontSize="12"/>
             </Grid>
             
             <Grid Margin="0, 0, 0, 15">
@@ -92,8 +102,25 @@
                 <TextBox Grid.Column="1" Name="steamPath" IsReadOnly="True" Background="LightGray" FontSize="12" Margin="10 0 10 0" />
             </Grid>
 
-            <TextBlock Text="Antti Alasalmi 2017" FontSize="12" Margin="10 20 10 0" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Save Scan"  Click="SaveScan_Click" Margin="10 0 10 0"  FontSize="12"/>
+            </Grid>
 
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1"  Text="Antti Alasalmi 2017" FontSize="12" Margin="10 20 10 0" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <TextBlock Grid.Column="0" Margin="10 20 10 0" HorizontalAlignment="Center"><Hyperlink NavigateUri="https://github.com/thatsafy/MGSV_Save_Switcher" RequestNavigate="Hyperlink_RequestNavigate">https://github.com/thatsafy/MGSV_Save_Switcher</Hyperlink></TextBlock>
+            </Grid>
+            
         </StackPanel>
     </Border>
 </Window>

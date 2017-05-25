@@ -17,16 +17,13 @@ namespace SteamScan
 
         private List<string> MGSV_Saves = new List<string>();
         
-        
-        
 
         public MySteamScanner()
         {
-            
-            this.MGSV_Saves.Add($"{this.MGSV1}\\*");
-            this.MGSV_Saves.Add($"{this.MGSV2}\\TPP_CONFIG_DATA");
-            this.MGSV_Saves.Add($"{this.MGSV2}\\TPP_GAME_DATA");
-            this.MGSV_Saves.Add($"{this.MGSV2}\\PERSONAL_DATA");
+            this.MGSV_Saves.Add($"{this.MGSV1}\\local\\*");
+            this.MGSV_Saves.Add($"{this.MGSV2}\\remote\\TPP_CONFIG_DATA");
+            this.MGSV_Saves.Add($"{this.MGSV2}\\remote\\TPP_GAME_DATA");
+            this.MGSV_Saves.Add($"{this.MGSV2}\\remote\\PERSONAL_DATA");
         }
         /// <summary>
         /// Find Steam install directory
@@ -62,7 +59,7 @@ namespace SteamScan
                     if (x.Contains("Steam.exe"))
                     {
                         Console.WriteLine("Found steam!");
-                        this.steamPath = x.Replace("Steam.exe", "");
+                        this.steamPath = x.Replace("Steam.exe", "").Trim();
                         CommandPrompter($"echo {this.steamPath} > {this.localDir}\\steam_path.txt");
                         return this.steamPath;
                     }
@@ -103,6 +100,7 @@ namespace SteamScan
                 {
                     if (line.Contains("PersonaName"))
                     {
+                        this.userID = userid;
                         this.userNames.Add(line.Replace("PersonaName", "").Replace("		", "").Replace("\"", ""));
                         return this.userNames;
                     }
@@ -127,60 +125,164 @@ namespace SteamScan
         /// <returns></returns>
         public List<string> SaveScan(string username)
         {
-            try
-            {
-                string command = $"{this.localDir[0]}: && dir /b /AD {this.localDir}\\{username} > {this.localDir}\\{username}\\saves.txt";
-                CommandPrompter(command);
-            } catch
-            {
-                string command = $"mkdir {this.localDir}\\{username} 2> nul";
-                CommandPrompter(command);
-                command = $"{this.localDir[0]}: && dir /b /AD {this.localDir}\\{username} > {this.localDir}\\{username}\\saves.txt";
-                CommandPrompter(command);
-            }
+            Console.WriteLine("Save scanning");
+            string command = $"mkdir {this.localDir}\\{username} 2> nul";
+            CommandPrompter(command);
+            command = $"{this.localDir[0]}: && dir /b /AD {this.localDir}\\{username} > {this.localDir}\\{username}\\saves.txt";
+            CommandPrompter(command);
 
-            string[] saves_temp = File.ReadAllLines($"{this.localDir}\\{ username}\\saves.txt");
+            string[] saves_temp = File.ReadAllLines($"{this.localDir}\\{username}\\saves.txt");
+            Console.WriteLine("Line 135");
             List<string> saves = new List<string>();
             foreach (string x in saves_temp)
             {
                 saves.Add(x);
             }
+            Console.WriteLine("Line 141");
+            Console.WriteLine(saves.Count);
+            
+            if (saves.Count <= 1)
+            {
+                Console.WriteLine("Line 144");
+                this.FirstSave("Original", username);
+            } else if (!saves.Contains(CurrentSave(username)))
+            {
+                Console.WriteLine("Line 148");
+                ChangeCurrentSave(saves[0], username);
+            }
+            Console.WriteLine("Lien 151");
             return saves;
         }
 
         public void SteamToLocal(string currentSave, string username)
         {
-            string command = $"xcopy / E / Y {this.steamPath}{this.MGSV1} {localDir}\\{username}\\{currentSave}\\{this.MGSV1} 2> nul";
-            CommandPrompter(command);
-            command = $"xcopy / E / Y {this.steamPath}{this.MGSV2} {localDir}\\{username}\\{currentSave}\\{this.MGSV2} 2> nul";
-            CommandPrompter(command);
+            string command = $"xcopy /E /Y {this.steamPath.Trim()}userdata\\{this.userID}\\{this.MGSV1} {localDir}\\{username}\\{currentSave}\\{this.MGSV1} 2> nul";
+            Console.WriteLine(command);
+            this.CommandPrompter(command);
+            command = $"xcopy /E /Y {this.steamPath.Trim()}userdata\\{this.userID}\\{this.MGSV2} {localDir}\\{username}\\{currentSave}\\{this.MGSV2} 2> nul";
+            Console.WriteLine(command);
+            this.CommandPrompter(command);
         }
 
         public void LocalToSteam(string currentSave, string username)
         {
-            string command = $"xcopy / E / Y {this.localDir}\\{username}\\{currentSave}\\{this.MGSV1} {this.steamPath}{this.MGSV1} 2> nul";
-            CommandPrompter(command);
-            command = $"xcopy / E / Y {this.localDir}\\{username}\\{currentSave}\\{this.MGSV2} {this.steamPath}{this.MGSV2} 2> nul";
-            CommandPrompter(command);
+            string command = $"xcopy /E /Y {this.localDir}\\{username}\\{currentSave}\\{this.MGSV1} {this.steamPath.Trim()}userdata\\{this.userID}\\{this.MGSV1} 2> nul";
+            this.CommandPrompter(command);
+            command = $"xcopy /E /Y {this.localDir}\\{username}\\{currentSave}\\{this.MGSV2} {this.steamPath.Trim()}userdata\\{this.userID}\\{this.MGSV2} 2> nul";
+            this.CommandPrompter(command);
         }
 
-
-        public string CurrentSave()
+        public void SteamToOld(string username)
         {
-            return "";
+            string command = $"mkdir {this.localDir}\\{username}\\OLD\\{this.MGSV1} 2> nul";
+            this.CommandPrompter(command);
+            command = $"mkdir {this.localDir}\\{username}\\OLD\\{this.MGSV2} 2> nul";
+            this.CommandPrompter(command);
+
+            command = $"xcopy /E /Y {this.steamPath.Trim()}userdata\\{this.userID}\\{this.MGSV1} {this.localDir}\\{username}\\OLD\\{this.MGSV1} 2> nul";
+            Console.WriteLine(command);
+            this.CommandPrompter(command);
+            command = $"xcopy /E /Y {this.steamPath.Trim()}userdata\\{this.userID}\\{this.MGSV2} {this.localDir}\\{username}\\OLD\\{this.MGSV2} 2> nul";
+            Console.WriteLine(command);
+            this.CommandPrompter(command);
         }
 
-        public void SaveSwitch(string currentsave, string nextsave, string username)
+        public string CurrentSave(string username)
         {
-            this.SteamToLocal(currentsave, username);
+            try
+            {
+                string currentsave = File.ReadAllLines($"{localDir}\\{username}\\current_save.txt")[0];
+                return currentsave.Trim();
+            } catch
+            {
+                string currentsave = "none";
+                string command = $"echo {currentsave} > {this.localDir}\\{username}\\current_save.txt";
+                this.CommandPrompter(command);
+                return currentsave.Trim();
+            }
+                
+        }
+
+        public void FirstSave(string savename, string username)
+        {
+            string command = $"mkdir {this.localDir}\\{username}\\{savename}";
+            this.CommandPrompter(command);
+            command = $"mkdir {this.localDir}\\{username}\\{savename}\\{this.MGSV1}";
+            this.CommandPrompter(command);
+            command = $"mkdir {this.localDir}\\{username}\\{savename}\\{this.MGSV2}";
+            this.CommandPrompter(command);
+            this.SteamToLocal(savename, username);
+            this.ChangeCurrentSave(savename, username);
+        }
+
+        public void SaveSwitch(string nextsave, string username)
+        {
+            string currentsave = CurrentSave(username);
+            if (!this.SaveScan(username).Contains(currentsave))
+            {
+                this.SteamToOld(username);
+            } else
+            {
+                this.SteamToLocal(currentsave, username);
+            }
+            this.DeleteSteamFiles();
             this.LocalToSteam(nextsave, username);
+            this.ChangeCurrentSave(nextsave, username);
         }
 
+        public void DeleteSteamFiles()
+        {
+            foreach (string data in this.MGSV_Saves)
+            {
+                string command = $"del /Q {this.steamPath.Trim()}userdata\\{this.userID}\\{data}";
+                Console.WriteLine(command);
+                this.CommandPrompter(command);
+            }
+        }
+
+        public void ChangeCurrentSave(string save, string username)
+        {
+            string command = $"echo {save} > {this.localDir}\\{username}\\current_save.txt";
+            this.CommandPrompter(command);
+        }
 
         public void NewSave(string savename, string username)
         {
-            string command = $"mkdir {localDir}\\{username}\\{savename}";
-            CommandPrompter(command);
+            string current = CurrentSave(username);
+   
+            this.SteamToLocal(current, username);
+            string command = $"mkdir {this.localDir}\\{username}\\{savename}";
+            this.CommandPrompter(command);
+            command = $"mkdir {this.localDir}\\{username}\\{savename}\\{this.MGSV1} 2> nul";
+            this.CommandPrompter(command);
+            command = $"mkdir {this.localDir}\\{username}\\{savename}\\{this.MGSV2} 2> nul";
+            this.CommandPrompter(command);
+            this.DeleteSteamFiles();
+            this.SteamToLocal(savename, username);
+            
+            this.ChangeCurrentSave(savename, username);
+        }
+
+        public void RenameSave(string save, string username, string newname)
+        {
+            string command = $"rename {this.localDir}\\{username}\\{save.Trim()} {newname}";
+            Console.WriteLine(command);
+            this.CommandPrompter(command);
+            ChangeCurrentSave(newname, username);
+        }
+
+        public void DeleteSave(string save, string username)
+        {
+            string command = $"rmdir /S /Q {localDir}\\{username}\\{save}";
+            this.CommandPrompter(command);
+            
+            if (save == CurrentSave(username))
+            {
+                this.DeleteSteamFiles();
+                string cursave = this.SaveScan(username)[0];
+                this.ChangeCurrentSave(cursave, username);
+                this.LocalToSteam(cursave, username);
+            }
         }
 
     }
